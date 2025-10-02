@@ -27,7 +27,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 class ExecutionControllerTest {
     @Mock
@@ -71,7 +71,7 @@ class ExecutionControllerTest {
     void testGetAllExecutions_ReturnsList() throws Exception {
         // Given: a list with one execution returned by the service
         List<Execution> executions = Collections.singletonList(execution);
-        when(executionService.getAllExecutions()).thenReturn(executions);
+        when(executionService.findAll()).thenReturn(executions);
 
         // When: the controller's getAllExecutions is called
         ResponseEntity<ApiResponse> response = executionController.getAllExecutions();
@@ -99,7 +99,7 @@ class ExecutionControllerTest {
     @Test
     void testGetExecutionById_Found() throws Exception {
         // Given: the service returns a valid execution for the given id
-        when(executionService.getExecutionById(executionId)).thenReturn(Optional.ofNullable(execution));
+        when(executionService.findById(executionId)).thenReturn(Optional.ofNullable(execution));
 
         // When: the controller's getExecutionById is called
         ResponseEntity<ApiResponse> response = executionController.getExecutionById(executionId, Locale.ENGLISH);
@@ -125,7 +125,7 @@ class ExecutionControllerTest {
     @Test
     void testGetExecutionById_NotFound_English() {
         // Given: the service returns null for the given id
-        when(executionService.getExecutionById(executionId)).thenReturn(Optional.empty());
+        when(executionService.findById(executionId)).thenReturn(Optional.empty());
         when(messageSource.getMessage(eq("error.not.found"), any(), eq(Locale.ENGLISH))).thenReturn("Resource not found.");
 
         // When: the controller's getExecutionById is called
@@ -134,7 +134,7 @@ class ExecutionControllerTest {
         // Then: the response should be 404 Not Found and body should contain error message and code
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals(404, response.getBody().getErrorCode());
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody().getErrorCode());
         assertEquals("Resource not found.", response.getBody().getMessage());
         assertNull(response.getBody().getData());
     }
@@ -142,7 +142,7 @@ class ExecutionControllerTest {
     @Test
     void testGetExecutionById_NotFound_Spanish() {
         // Given: the service returns null for the given id
-        when(executionService.getExecutionById(executionId)).thenReturn(Optional.empty());
+        when(executionService.findById(executionId)).thenReturn(Optional.empty());
         Locale spanish = Locale.forLanguageTag("es");
         when(messageSource.getMessage(eq("error.not.found"), any(), eq(spanish))).thenReturn("Recurso no encontrado.");
 
@@ -161,7 +161,7 @@ class ExecutionControllerTest {
     void testGetExecutionsPage_ReturnsJsonViewPageUtil() throws Exception {
         // Given: a page with one execution returned by the service
         Page<Execution> page = new PageImpl<>(Collections.singletonList(execution), PageRequest.of(0, 10), 1);
-        when(executionService.getExecutionsPage(0, 10)).thenReturn(page);
+        when(executionService.findAll(PageRequest.of(0, 10))).thenReturn(page);
 
         // When: the controller's getExecutionsPage is called
         ResponseEntity<ApiResponse> response = executionController.getExecutionsPage(0, 10);

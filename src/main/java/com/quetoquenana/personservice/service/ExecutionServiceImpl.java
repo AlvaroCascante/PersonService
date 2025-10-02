@@ -2,11 +2,11 @@ package com.quetoquenana.personservice.service;
 
 import com.quetoquenana.personservice.model.Execution;
 import com.quetoquenana.personservice.repository.ExecutionRepository;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.net.InetAddress;
 import java.time.LocalDateTime;
@@ -45,17 +45,17 @@ public class ExecutionServiceImpl implements ExecutionService {
     }
 
     @Override
-    public List<Execution> getAllExecutions() {
+    public List<Execution> findAll() {
         return executionRepository.findAll();
     }
 
     @Override
-    public Optional<Execution> getExecutionById(UUID id) {
+    public Optional<Execution> findById(UUID id) {
         return executionRepository.findById(id);
     }
 
     @Override
-    public Page<Execution> getExecutionsPage(int page, int size) {
-        return executionRepository.findAll(PageRequest.of(page, size));
+    public Page<Execution> findAll(Pageable pageable) {
+        return executionRepository.findAll(pageable);
     }
 }
