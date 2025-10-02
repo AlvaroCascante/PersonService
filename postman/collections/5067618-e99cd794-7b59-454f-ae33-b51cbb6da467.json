@@ -265,6 +265,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create Person Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ae3391c6-46ba-4e32-9349-809da0571879",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "5067618-35b0a44a-ab85-4a6d-af7d-3d7236c57494",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"1999-01-01\",\n  \"gender\": \"male\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "5067618-1154a951-6b02-45af-bf0d-ec16174f0af2"
