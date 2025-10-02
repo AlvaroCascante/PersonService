@@ -189,7 +189,7 @@
 					"response": []
 				},
 				{
-					"name": "Get By ID Copy",
+					"name": "Get By IdNumber",
 					"id": "5067618-fa0403be-c6d3-46b9-8cfb-39fd1e5df05f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
