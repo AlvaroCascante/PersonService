@@ -61,6 +61,29 @@
 					"response": []
 				},
 				{
+					"name": "Fetch All Persons Copy",
+					"id": "5067618-eb2ead89-db49-4c93-b3dd-cf6bc10d9165",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/executions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"executions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Person",
 					"event": [
 						{
