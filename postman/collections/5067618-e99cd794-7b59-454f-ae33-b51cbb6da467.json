@@ -291,7 +291,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"2000-01-01\",\n  \"gender\": \"female\"\n}\n",
+							"raw": "{\n    \"name\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"birthday\": \"2000-01-01\",\n    \"gender\": \"female\",\n    \"idNumber\": \"ID123457\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
