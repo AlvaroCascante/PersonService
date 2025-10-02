@@ -168,7 +168,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/:id",
+							"raw": "{{HOST}}/{{path}}/api/persons/idNumber/:idNumber",
 							"host": [
 								"{{HOST}}"
 							],
@@ -176,12 +176,13 @@
 								"{{path}}",
 								"api",
 								"persons",
-								":id"
+								"idNumber",
+								":idNumber"
 							],
 							"variable": [
 								{
-									"key": "id",
-									"value": "68153a7c-ed11-4489-80ee-bd1999cd9431"
+									"key": "idNumber",
+									"value": "ID123456"
 								}
 							]
 						}
