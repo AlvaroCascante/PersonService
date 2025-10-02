@@ -70,14 +70,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons",
+							"raw": "{{HOST}}/{{path}}/api/persons/page",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"{{path}}",
 								"api",
-								"persons"
+								"persons",
+								"page"
 							]
 						}
 					},
