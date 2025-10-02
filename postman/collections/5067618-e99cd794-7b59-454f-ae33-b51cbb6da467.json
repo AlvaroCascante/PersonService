@@ -6,8 +6,8 @@
 	},
 	"item": [
 		{
-			"name": "Find All Executions",
-			"id": "5067618-6c269bff-5b5f-463d-931e-9f2907e7926d",
+			"name": "Health Check",
+			"id": "5067618-c5962757-314e-42fd-9370-a24ff94cf571",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -15,22 +15,22 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}/{{path}}/api/executions",
+					"raw": "{{HOST}}/{{path}}/actuator/health",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
 						"{{path}}",
-						"api",
-						"executions"
+						"actuator",
+						"health"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Health Check",
-			"id": "5067618-c5962757-314e-42fd-9370-a24ff94cf571",
+			"name": "Health Check Copy",
+			"id": "5067618-765e88cc-09f9-4f62-8443-0cf6b3749254",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
