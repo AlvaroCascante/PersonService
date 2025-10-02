@@ -6,11 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Executions",
-			"item": [],
-			"id": "5067618-3484f916-e348-4d10-89f3-ec4ecdb60981"
-		},
-		{
 			"name": "Find All Executions",
 			"id": "5067618-6c269bff-5b5f-463d-931e-9f2907e7926d",
 			"protocolProfileBehavior": {
