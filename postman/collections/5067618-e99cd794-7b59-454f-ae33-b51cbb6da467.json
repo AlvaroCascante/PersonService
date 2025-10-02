@@ -64,6 +64,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Fetch All Executions Copy",
+					"id": "5067618-975f7ba1-066b-408f-88b3-3c6a3765b71b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/executions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"executions"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "5067618-934d52da-d966-4692-a4a5-da87b181b498"
