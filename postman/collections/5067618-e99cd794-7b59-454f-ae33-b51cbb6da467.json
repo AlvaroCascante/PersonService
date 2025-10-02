@@ -32,7 +32,7 @@
 					"response": []
 				},
 				{
-					"name": "Fetch All Executions Copy",
+					"name": "Fetch All Executions Page",
 					"id": "5067618-b93883c9-c576-49e5-9e09-1c83dc065463",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
