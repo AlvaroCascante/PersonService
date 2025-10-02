@@ -38,7 +38,7 @@
 			"name": "Persons",
 			"item": [
 				{
-					"name": "Fetch All Executions",
+					"name": "Fetch All Persons",
 					"id": "5067618-a5c1ef46-290f-452f-8041-04a8bccd49cd",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
