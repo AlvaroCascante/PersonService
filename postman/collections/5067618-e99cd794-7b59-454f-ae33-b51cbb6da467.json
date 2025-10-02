@@ -159,7 +159,7 @@
 					"response": []
 				},
 				{
-					"name": "Get By ID",
+					"name": "Get By IdNumber",
 					"id": "5067618-eb2ead89-db49-4c93-b3dd-cf6bc10d9165",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -190,7 +190,7 @@
 					"response": []
 				},
 				{
-					"name": "Get By IdNumber",
+					"name": "Get By ID",
 					"id": "5067618-fa0403be-c6d3-46b9-8cfb-39fd1e5df05f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
