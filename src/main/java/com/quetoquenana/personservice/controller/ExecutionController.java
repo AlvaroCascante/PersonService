@@ -1,16 +1,15 @@
 package com.quetoquenana.personservice.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.quetoquenana.personservice.exception.RecordNotFoundException;
 import com.quetoquenana.personservice.model.ApiResponse;
 import com.quetoquenana.personservice.model.Execution;
 import com.quetoquenana.personservice.service.ExecutionService;
 import com.quetoquenana.personservice.util.JsonViewPageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,6 @@ import java.util.UUID;
 public class ExecutionController {
 
     private final ExecutionService executionService;
-    private final MessageSource messageSource;
 
     /**
      * Get all executions
@@ -55,8 +53,7 @@ public class ExecutionController {
             .map(entity -> ResponseEntity.ok(new ApiResponse(entity)))
             .orElseGet(() -> {
                 log.error("Execution with id {} not found", id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse(messageSource.getMessage("error.not.found", null, locale), HttpStatus.NOT_FOUND.value()));
+                throw new RecordNotFoundException("record.not.found", null, locale);
             });
     }
 

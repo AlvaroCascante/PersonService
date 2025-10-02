@@ -1,5 +1,6 @@
 package com.quetoquenana.personservice.service;
 
+import com.quetoquenana.personservice.exception.ImmutableFieldModificationException;
 import com.quetoquenana.personservice.model.Person;
 import com.quetoquenana.personservice.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,20 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person save(Person person) {
+        return personRepository.save(person);
+    }
+
+    @Override
+    public Person update(Person person, Person newPerson) {
+        if (!person.getIdNumber().equals(newPerson.getIdNumber())) {
+            throw new ImmutableFieldModificationException("person.id.number.immutable");
+        }
+        // Only update allowed fields
+        person.setName(newPerson.getName());
+        person.setLastname(newPerson.getLastname());
+        person.setBirthday(newPerson.getBirthday());
+        person.setGender(newPerson.getGender());
+        // Do NOT update idNumber
         return personRepository.save(person);
     }
 

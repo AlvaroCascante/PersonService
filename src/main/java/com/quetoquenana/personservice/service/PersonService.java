@@ -17,6 +17,8 @@ public interface PersonService {
 
     Person save(Person person);
 
+    Person update(Person person, Person newPerson);
+
     void deleteById(UUID id);
 
     Optional<Person> findByIdNumber(String idNumber);

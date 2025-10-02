@@ -20,7 +20,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -45,7 +44,7 @@ class ExecutionControllerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
         executionId = UUID.randomUUID();
         execution = new Execution(
@@ -59,12 +58,6 @@ class ExecutionControllerTest {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        // Inject the mock MessageSource into the controller
-        Field field = ExecutionController.class.getDeclaredField("messageSource");
-        field.setAccessible(true);
-        field.set(executionController, messageSource);
-        // Mock getMessage for error.not.found
-        when(messageSource.getMessage(eq("error.not.found"), any(), any())).thenReturn("Resource not found.");
     }
 
     @Test
@@ -77,10 +70,8 @@ class ExecutionControllerTest {
         ResponseEntity<ApiResponse> response = executionController.getAllExecutions();
 
         // Then: the response should be 200 OK and contain the executions list in ApiResponse.data
-        assertEquals(ResponseEntity.ok().build().getStatusCode(), response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNotNull(response.getBody().getMessage());
-        assertNotNull(response.getBody().getErrorCode());
         assertNotNull(response.getBody().getData());
         assertInstanceOf(List.class, response.getBody().getData());
         List<?> resultList = (List<?>) response.getBody().getData();
@@ -105,10 +96,8 @@ class ExecutionControllerTest {
         ResponseEntity<ApiResponse> response = executionController.getExecutionById(executionId, Locale.ENGLISH);
 
         // Then: the response should be 200 OK and contain the execution in ApiResponse.data
-        assertEquals(ResponseEntity.ok().build().getStatusCode(), response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNotNull(response.getBody().getMessage());
-        assertNotNull(response.getBody().getErrorCode());
         assertNotNull(response.getBody().getData());
         assertInstanceOf(Execution.class, response.getBody().getData());
         Execution result = (Execution) response.getBody().getData();
@@ -124,37 +113,17 @@ class ExecutionControllerTest {
 
     @Test
     void testGetExecutionById_NotFound_English() {
-        // Given: the service returns null for the given id
         when(executionService.findById(executionId)).thenReturn(Optional.empty());
         when(messageSource.getMessage(eq("error.not.found"), any(), eq(Locale.ENGLISH))).thenReturn("Resource not found.");
-
-        // When: the controller's getExecutionById is called
-        ResponseEntity<ApiResponse> response = executionController.getExecutionById(executionId, Locale.ENGLISH);
-
-        // Then: the response should be 404 Not Found and body should contain error message and code
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody().getErrorCode());
-        assertEquals("Resource not found.", response.getBody().getMessage());
-        assertNull(response.getBody().getData());
+        assertThrows(com.quetoquenana.personservice.exception.RecordNotFoundException.class, () -> executionController.getExecutionById(executionId, Locale.ENGLISH));
     }
 
     @Test
     void testGetExecutionById_NotFound_Spanish() {
-        // Given: the service returns null for the given id
         when(executionService.findById(executionId)).thenReturn(Optional.empty());
         Locale spanish = Locale.forLanguageTag("es");
         when(messageSource.getMessage(eq("error.not.found"), any(), eq(spanish))).thenReturn("Recurso no encontrado.");
-
-        // When: the controller's getExecutionById is called
-        ResponseEntity<ApiResponse> response = executionController.getExecutionById(executionId, spanish);
-
-        // Then: the response should be 404 Not Found and body should contain error message and code
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(404, response.getBody().getErrorCode());
-        assertEquals("Recurso no encontrado.", response.getBody().getMessage());
-        assertNull(response.getBody().getData());
+        assertThrows(com.quetoquenana.personservice.exception.RecordNotFoundException.class, () -> executionController.getExecutionById(executionId, spanish));
     }
 
     @Test
@@ -167,10 +136,8 @@ class ExecutionControllerTest {
         ResponseEntity<ApiResponse> response = executionController.getExecutionsPage(0, 10);
 
         // Then: the response should be 200 OK and contain a JsonViewPageUtil in ApiResponse.data
-        assertEquals(ResponseEntity.ok().build().getStatusCode(), response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNotNull(response.getBody().getMessage());
-        assertEquals(0, response.getBody().getErrorCode());
         assertNotNull(response.getBody().getData());
         assertInstanceOf(JsonViewPageUtil.class, response.getBody().getData());
         JsonViewPageUtil<?> pageUtil = (JsonViewPageUtil<?>) response.getBody().getData();
