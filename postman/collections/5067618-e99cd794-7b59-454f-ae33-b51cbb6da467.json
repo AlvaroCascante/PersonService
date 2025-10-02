@@ -47,14 +47,37 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/executions",
+							"raw": "{{HOST}}/{{path}}/api/persons",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"{{path}}",
 								"api",
-								"executions"
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Persons Copy",
+					"id": "5067618-55404d5b-cfa6-44d6-82ec-236603bb7a62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons"
 							]
 						}
 					},
