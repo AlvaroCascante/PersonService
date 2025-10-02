@@ -6,6 +6,238 @@
 	},
 	"item": [
 		{
+			"name": "Executions",
+			"item": [
+				{
+					"name": "Fetch All Executions",
+					"id": "5067618-765e88cc-09f9-4f62-8443-0cf6b3749254",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/executions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"executions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Executions Page",
+					"id": "5067618-b93883c9-c576-49e5-9e09-1c83dc065463",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/executions/page?page=1&size=5",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"executions",
+								"page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By ID",
+					"id": "5067618-975f7ba1-066b-408f-88b3-3c6a3765b71b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/executions/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"executions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "eb84da33-38b3-42fb-8cb1-6ab6406be723"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-934d52da-d966-4692-a4a5-da87b181b498"
+		},
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "Fetch All Persons",
+					"id": "5067618-a5c1ef46-290f-452f-8041-04a8bccd49cd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Persons Page",
+					"id": "5067618-55404d5b-cfa6-44d6-82ec-236603bb7a62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/page?page=1&size=5",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"id": "5067618-eb2ead89-db49-4c93-b3dd-cf6bc10d9165",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68153a7c-ed11-4489-80ee-bd1999cd9431"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Person",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ae3391c6-46ba-4e32-9349-809da0571879",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "5067618-c470f381-d51b-44c9-8f98-1b53fe524047",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"1999-01-01\",\n  \"gender\": \"male\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-1154a951-6b02-45af-bf0d-ec16174f0af2"
+		},
+		{
 			"name": "Health Check",
 			"id": "5067618-c5962757-314e-42fd-9370-a24ff94cf571",
 			"protocolProfileBehavior": {
@@ -15,12 +247,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}/personservice/actuator/health",
+					"raw": "{{HOST}}/{{path}}/actuator/health",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
-						"personservice",
+						"{{path}}",
 						"actuator",
 						"health"
 					]
@@ -48,7 +280,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "979683a5-a0aa-4b43-ad27-4ca02d8475e2",
+				"id": "6adc9a9c-84e4-4d74-ab0f-e57236019643",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -60,7 +292,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "7e075bba-8371-4af6-951e-85b9796f86e5",
+				"id": "9fab5f11-4625-48d6-9226-d0d1e15f0401",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -68,6 +300,12 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "path",
+			"value": ""
 		}
 	]
 }
