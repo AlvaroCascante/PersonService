@@ -267,7 +267,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Person Copy",
+					"name": "Update Person",
 					"event": [
 						{
 							"listen": "prerequest",
