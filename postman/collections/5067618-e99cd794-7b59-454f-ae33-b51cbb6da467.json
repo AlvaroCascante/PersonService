@@ -68,8 +68,7 @@
 							"script": {
 								"id": "ae3391c6-46ba-4e32-9349-809da0571879",
 								"exec": [
-									"const randomDate = moment().subtract(Math.floor(Math.random() * 365), 'days').format('YYYY-MM-DD');",
-									"pm.environment.set(\"randomDatePast\", randomDate);"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -86,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": {{$randomDatePast}},\n  \"gender\": \"male\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"1999-01-01\",\n  \"gender\": \"male\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
