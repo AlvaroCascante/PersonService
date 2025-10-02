@@ -35,6 +35,35 @@
 			"id": "5067618-934d52da-d966-4692-a4a5-da87b181b498"
 		},
 		{
+			"name": "Executions Copy",
+			"item": [
+				{
+					"name": "Fetch All Executions",
+					"id": "5067618-a5c1ef46-290f-452f-8041-04a8bccd49cd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/executions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"executions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-1154a951-6b02-45af-bf0d-ec16174f0af2"
+		},
+		{
 			"name": "Health Check",
 			"id": "5067618-c5962757-314e-42fd-9370-a24ff94cf571",
 			"protocolProfileBehavior": {
