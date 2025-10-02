@@ -64,7 +64,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/executions/page?page=1&size=5",
+							"raw": "{{HOST}}/{{path}}/api/executions/:id",
 							"host": [
 								"{{HOST}}"
 							],
@@ -72,16 +72,12 @@
 								"{{path}}",
 								"api",
 								"executions",
-								"page"
+								":id"
 							],
-							"query": [
+							"variable": [
 								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "size",
-									"value": "5"
+									"key": "id",
+									"value": "eb84da33-38b3-42fb-8cb1-6ab6406be723"
 								}
 							]
 						}
