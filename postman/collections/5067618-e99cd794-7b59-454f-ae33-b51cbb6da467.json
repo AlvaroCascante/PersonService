@@ -61,7 +61,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Create Person",
 					"id": "5067618-c470f381-d51b-44c9-8f98-1b53fe524047",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
