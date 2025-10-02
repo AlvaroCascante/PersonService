@@ -15,12 +15,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}/template/api/executions",
+					"raw": "{{HOST}}/{{path}}/api/executions",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
-						"template",
+						"{{path}}",
 						"api",
 						"executions"
 					]
@@ -38,12 +38,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}/personservice/actuator/health",
+					"raw": "{{HOST}}/{{path}}/actuator/health",
 					"host": [
 						"{{HOST}}"
 					],
 					"path": [
-						"personservice",
+						"{{path}}",
 						"actuator",
 						"health"
 					]
