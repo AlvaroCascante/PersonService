@@ -189,6 +189,37 @@
 					"response": []
 				},
 				{
+					"name": "Get By ID Copy",
+					"id": "5067618-fa0403be-c6d3-46b9-8cfb-39fd1e5df05f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"id": "6353f4eb-b994-448c-b135-d7f75a203e27",
+									"key": "id",
+									"value": "68153a7c-ed11-4489-80ee-bd1999cd9431"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Person",
 					"event": [
 						{
