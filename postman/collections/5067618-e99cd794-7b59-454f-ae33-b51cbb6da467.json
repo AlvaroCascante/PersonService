@@ -9,40 +9,6 @@
 			"name": "Executions",
 			"item": [
 				{
-					"name": "Fetch All Pages",
-					"id": "5067618-a2b99cd1-3e13-497d-956b-5f85c7952f27",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/template/api/executions/page?page=1&size=5",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"template",
-								"api",
-								"executions",
-								"page"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "size",
-									"value": "5"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Fetch All Executions",
 					"id": "5067618-765e88cc-09f9-4f62-8443-0cf6b3749254",
 					"protocolProfileBehavior": {
@@ -66,7 +32,7 @@
 					"response": []
 				},
 				{
-					"name": "Fetch All Executions Copy",
+					"name": "Fetch All Executions PAge",
 					"id": "5067618-975f7ba1-066b-408f-88b3-3c6a3765b71b",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
