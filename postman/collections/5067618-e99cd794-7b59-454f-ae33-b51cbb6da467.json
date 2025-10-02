@@ -287,11 +287,11 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"1999-01-01\",\n  \"gender\": \"male\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"2000-01-01\",\n  \"gender\": \"female\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -299,14 +299,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons",
+							"raw": "{{HOST}}/{{path}}/api/persons/:id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"{{path}}",
 								"api",
-								"persons"
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68153a7c-ed11-4489-80ee-bd1999cd9431"
+								}
 							]
 						}
 					},
