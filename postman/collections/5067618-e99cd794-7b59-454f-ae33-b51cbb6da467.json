@@ -61,7 +61,7 @@
 					"response": []
 				},
 				{
-					"name": "Fetch All Persons Copy",
+					"name": "Get By ID",
 					"id": "5067618-eb2ead89-db49-4c93-b3dd-cf6bc10d9165",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
