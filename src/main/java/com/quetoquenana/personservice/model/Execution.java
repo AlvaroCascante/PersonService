@@ -1,4 +1,4 @@
-package com.quetoquenana.template.model;
+package com.quetoquenana.personservice.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

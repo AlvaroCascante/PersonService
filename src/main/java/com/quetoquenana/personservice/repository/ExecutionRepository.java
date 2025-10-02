@@ -1,6 +1,6 @@
-package com.quetoquenana.template.repository;
+package com.quetoquenana.personservice.repository;
 
-import com.quetoquenana.template.model.Execution;
+import com.quetoquenana.personservice.model.Execution;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

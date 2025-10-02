@@ -1,4 +1,4 @@
-# Template Spring Boot Project
+# Person Service Spring Boot Project
 
 This repository is a template for creating new Spring Boot projects with a pre-configured set of essential dependencies and features. It is designed to help you quickly bootstrap robust, production-ready applications.
 

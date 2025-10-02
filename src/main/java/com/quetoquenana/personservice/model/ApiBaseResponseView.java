@@ -1,4 +1,4 @@
-package com.quetoquenana.template.model;
+package com.quetoquenana.personservice.model;
 
 public class ApiBaseResponseView {
     public static class Always {}

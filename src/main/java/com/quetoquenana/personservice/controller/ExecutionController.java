@@ -1,11 +1,11 @@
-package com.quetoquenana.template.controller;
+package com.quetoquenana.personservice.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.quetoquenana.template.model.Execution;
-import com.quetoquenana.template.model.ApiResponse;
-import com.quetoquenana.template.model.ApiBaseResponseView;
-import com.quetoquenana.template.util.JsonViewPageUtil;
-import com.quetoquenana.template.service.ExecutionService;
+import com.quetoquenana.personservice.model.Execution;
+import com.quetoquenana.personservice.model.ApiResponse;
+import com.quetoquenana.personservice.model.ApiBaseResponseView;
+import com.quetoquenana.personservice.util.JsonViewPageUtil;
+import com.quetoquenana.personservice.service.ExecutionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

@@ -1,6 +1,6 @@
-package com.quetoquenana.template.service;
+package com.quetoquenana.personservice.service;
 
-import com.quetoquenana.template.model.Execution;
+import com.quetoquenana.personservice.model.Execution;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

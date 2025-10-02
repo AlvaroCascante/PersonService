@@ -1,8 +1,8 @@
-package com.quetoquenana.template.util;
+package com.quetoquenana.personservice.util;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.quetoquenana.template.model.ApiBaseResponseView;
-import com.quetoquenana.template.model.Execution;
+import com.quetoquenana.personservice.model.ApiBaseResponseView;
+import com.quetoquenana.personservice.model.Execution;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

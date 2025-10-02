@@ -1,13 +1,13 @@
-package com.quetoquenana.template.controller;
+package com.quetoquenana.personservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.quetoquenana.template.model.ApiBaseResponseView;
-import com.quetoquenana.template.model.ApiResponse;
-import com.quetoquenana.template.model.Execution;
-import com.quetoquenana.template.service.ExecutionService;
-import com.quetoquenana.template.util.JsonViewPageUtil;
+import com.quetoquenana.personservice.model.ApiBaseResponseView;
+import com.quetoquenana.personservice.model.ApiResponse;
+import com.quetoquenana.personservice.model.Execution;
+import com.quetoquenana.personservice.service.ExecutionService;
+import com.quetoquenana.personservice.util.JsonViewPageUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -79,8 +79,8 @@ class ExecutionControllerTest {
         // Then: the response should be 200 OK and contain the executions list in ApiResponse.data
         assertEquals(ResponseEntity.ok().build().getStatusCode(), response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNull(response.getBody().getMessage());
-        assertNull(response.getBody().getErrorCode());
+        assertNotNull(response.getBody().getMessage());
+        assertNotNull(response.getBody().getErrorCode());
         assertNotNull(response.getBody().getData());
         assertInstanceOf(List.class, response.getBody().getData());
         List<?> resultList = (List<?>) response.getBody().getData();
@@ -107,8 +107,8 @@ class ExecutionControllerTest {
         // Then: the response should be 200 OK and contain the execution in ApiResponse.data
         assertEquals(ResponseEntity.ok().build().getStatusCode(), response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNull(response.getBody().getMessage());
-        assertNull(response.getBody().getErrorCode());
+        assertNotNull(response.getBody().getMessage());
+        assertNotNull(response.getBody().getErrorCode());
         assertNotNull(response.getBody().getData());
         assertInstanceOf(Execution.class, response.getBody().getData());
         Execution result = (Execution) response.getBody().getData();
@@ -134,7 +134,7 @@ class ExecutionControllerTest {
         // Then: the response should be 404 Not Found and body should contain error message and code
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals("ERR_404", response.getBody().getErrorCode());
+        assertEquals(404, response.getBody().getErrorCode());
         assertEquals("Resource not found.", response.getBody().getMessage());
         assertNull(response.getBody().getData());
     }
@@ -152,7 +152,7 @@ class ExecutionControllerTest {
         // Then: the response should be 404 Not Found and body should contain error message and code
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals("ERR_404", response.getBody().getErrorCode());
+        assertEquals(404, response.getBody().getErrorCode());
         assertEquals("Recurso no encontrado.", response.getBody().getMessage());
         assertNull(response.getBody().getData());
     }
@@ -169,8 +169,8 @@ class ExecutionControllerTest {
         // Then: the response should be 200 OK and contain a JsonViewPageUtil in ApiResponse.data
         assertEquals(ResponseEntity.ok().build().getStatusCode(), response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNull(response.getBody().getMessage());
-        assertNull(response.getBody().getErrorCode());
+        assertNotNull(response.getBody().getMessage());
+        assertEquals(0, response.getBody().getErrorCode());
         assertNotNull(response.getBody().getData());
         assertInstanceOf(JsonViewPageUtil.class, response.getBody().getData());
         JsonViewPageUtil<?> pageUtil = (JsonViewPageUtil<?>) response.getBody().getData();

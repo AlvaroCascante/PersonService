@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.quetoquenana</groupId>
-	<artifactId>template</artifactId>
+	<artifactId>personservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Template</name>
-	<description>Template to create new Spring Booh projects</description>
+	<description>Person Service Spring Boot projects</description>
 	<url/>
 	<licenses>
 		<license/>

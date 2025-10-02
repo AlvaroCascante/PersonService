@@ -1,4 +1,4 @@
-package com.quetoquenana.template.model;
+package com.quetoquenana.personservice.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;

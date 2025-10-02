@@ -1,7 +1,7 @@
-package com.quetoquenana.template.service;
+package com.quetoquenana.personservice.service;
 
-import com.quetoquenana.template.model.Execution;
-import com.quetoquenana.template.repository.ExecutionRepository;
+import com.quetoquenana.personservice.model.Execution;
+import com.quetoquenana.personservice.repository.ExecutionRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;

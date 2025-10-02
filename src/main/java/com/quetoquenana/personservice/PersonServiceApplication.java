@@ -1,13 +1,13 @@
-package com.quetoquenana.template;
+package com.quetoquenana.personservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TemplateApplication {
+public class PersonServiceApplication {
 
     static void main(String[] args) {
-		SpringApplication.run(TemplateApplication.class, args);
+		SpringApplication.run(PersonServiceApplication.class, args);
 	}
 
 }

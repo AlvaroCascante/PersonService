@@ -1,4 +1,4 @@
-package com.quetoquenana.template.config;
+package com.quetoquenana.personservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
