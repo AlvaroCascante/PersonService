@@ -245,7 +245,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"birthday\": \"1999-01-01\",\n  \"gender\": \"male\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
