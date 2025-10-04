@@ -1,6 +1,7 @@
 package com.quetoquenana.personservice.service;
 
 import com.quetoquenana.personservice.model.Person;
+import com.quetoquenana.personservice.model.PersonProfile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,7 +18,7 @@ public interface PersonService {
 
     Person save(Person person);
 
-    Person update(Person person, Person newPerson);
+    Person update(UUID id, Person person);
 
     void deleteById(UUID id);
 

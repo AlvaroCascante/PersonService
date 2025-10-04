@@ -41,7 +41,22 @@ public class SecurityConfig {
                 User.builder()
                         .username("user")
                         .password(passwordEncoder.encode("password"))
-                        .roles("SYSTEM")
+                        .roles("USER")
+                        .build(),
+                User.builder()
+                    .username("system")
+                    .password(passwordEncoder.encode("password"))
+                    .roles("SYSTEM")
+                    .build(),
+                User.builder()
+                        .username("admin")
+                        .password(passwordEncoder.encode("password"))
+                        .roles("ADMIN")
+                        .build(),
+                User.builder()
+                        .username("auditor")
+                        .password(passwordEncoder.encode("password"))
+                        .roles("AUDITOR")
                         .build()
         );
     }

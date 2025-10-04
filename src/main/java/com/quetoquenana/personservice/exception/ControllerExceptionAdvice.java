@@ -33,4 +33,12 @@ public class ControllerExceptionAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ApiResponse(message, HttpStatus.NOT_FOUND.value()));
     }
+
+    @ExceptionHandler(DuplicateRecordException.class)
+    public ResponseEntity<ApiResponse> handleDuplicateRecordException(
+            DuplicateRecordException ex, Locale locale) {
+        log.error("Duplicate record: {}", ex.getMessage());
+        String message = messageSource.getMessage(ex.getMessage(), null, locale);
+        return ResponseEntity.badRequest().body(new ApiResponse(message, HttpStatus.CONFLICT.value()));
+    }
 }

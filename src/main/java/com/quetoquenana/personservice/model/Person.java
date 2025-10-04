@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "person")
-@Data
+@Table(name = "persons")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Person {
+@Getter
+@Setter
+public class Person extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,25 +21,25 @@ public class Person {
     @JsonView(PersonList.class)
     private UUID id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "id_number", nullable = false, unique = true)
     @JsonView(PersonList.class)
     private String idNumber;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     @JsonView(PersonList.class)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "lastname", nullable = false)
     @JsonView(PersonList.class)
     private String lastname;
 
-    @Column(nullable = false)
+    @Column(name = "is_active", nullable = false)
     @JsonView(PersonDetail.class)
-    private LocalDate birthday;
+    private boolean isActive;
 
-    @Column(nullable = false)
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     @JsonView(PersonDetail.class)
-    private String gender;
+    private PersonProfile personProfile;
 
     // JSON Views to control serialization responses
     public static class PersonList extends ApiBaseResponseView.Always {}

@@ -31,7 +31,7 @@ public class ExecutionController {
      * @return ResponseEntity with ApiResponse (list of executions)
      */
     @GetMapping
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
     @JsonView(Execution.ExecutionList.class)
     public ResponseEntity<ApiResponse> getAllExecutions() {
         log.info("GET /api/executions called");
@@ -45,7 +45,7 @@ public class ExecutionController {
      * @return ResponseEntity with ApiResponse (execution or error)
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('SYSTEM')")
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
     @JsonView(Execution.ExecutionDetail.class)
     public ResponseEntity<ApiResponse> getExecutionById(@PathVariable UUID id, Locale locale) {
         log.info("GET /api/executions/{} called", id);
@@ -64,7 +64,7 @@ public class ExecutionController {
      * @return ResponseEntity with ApiResponse (paginated executions)
      */
     @GetMapping("/page")
-    @PreAuthorize("hasRole('SYSTEM')")
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
     @JsonView(Execution.ExecutionList.class)
     public ResponseEntity<ApiResponse> getExecutionsPage(
             @RequestParam(defaultValue = "0") int page,

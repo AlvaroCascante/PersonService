@@ -29,7 +29,7 @@ public class PersonController {
 
     @GetMapping
     @JsonView(Person.PersonList.class)
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('AUDITOR')") // Only ADMIN and AUDITOR roles can access
     public ResponseEntity<ApiResponse> getAllPersons() {
         log.info("GET /api/persons called");
         List<Person> entities = personService.findAll();
@@ -38,7 +38,7 @@ public class PersonController {
 
     @GetMapping("/page")
     @JsonView(Person.PersonList.class)
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('AUDITOR')") // Only ADMIN and AUDITOR roles can access
     public ResponseEntity<ApiResponse> getPersonsPage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -49,7 +49,7 @@ public class PersonController {
 
     @GetMapping("/{id}")
     @JsonView(Person.PersonDetail.class)
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('AUDITOR') or hasRole('USER')") // ADMIN, AUDITOR and USER roles can access
     public ResponseEntity<ApiResponse> getPersonById(@PathVariable UUID id, Locale locale) {
         log.info("GET /api/persons/{} called", id);
         return personService.findById(id)
@@ -62,7 +62,7 @@ public class PersonController {
 
     @GetMapping("/idNumber/{idNumber}")
     @JsonView(Person.PersonDetail.class)
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('AUDITOR') or hasRole('USER')") // ADMIN, AUDITOR and USER roles can access
     public ResponseEntity<ApiResponse> getPersonByIdNumber(@PathVariable String idNumber, Locale locale) {
         log.info("GET /api/persons/idNumber/{} called", idNumber);
         return personService.findByIdNumber(idNumber)
@@ -75,7 +75,8 @@ public class PersonController {
 
     @PostMapping
     @JsonView(Person.PersonDetail.class)
-    public ResponseEntity<ApiResponse> createPerson(@RequestBody Person person, Locale locale) {
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
+    public ResponseEntity<ApiResponse> createPerson(@RequestBody Person person) {
         log.info("POST /api/persons called with payload: {}", person);
         Person entity = personService.save(person);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -84,24 +85,20 @@ public class PersonController {
 
     @PutMapping("/{id}")
     @JsonView(Person.PersonDetail.class)
-    public ResponseEntity<ApiResponse> updatePerson(@PathVariable UUID id, @RequestBody Person newPerson, Locale locale) {
-        log.info("PUT /api/persons/{} called", id);
-        Optional<Person> entity = personService.findById(id);
-        if (entity.isEmpty()) {
-            throw new RecordNotFoundException("record.not.found", null, locale);
-        }
-        Person updated = personService.update(entity.get(), newPerson);
-        return ResponseEntity.ok(new ApiResponse(updated));
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
+    public ResponseEntity<ApiResponse> updatePerson(@PathVariable UUID id, @RequestBody Person person) {
+        log.info("PUT /api/persons/{} called with payload: {}", id, person);
+        Person entity = personService.update(id, person);
+        return ResponseEntity.ok(new ApiResponse(entity));
 
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
     public ResponseEntity<Void> deletePerson(@PathVariable UUID id) {
         log.info("DELETE /api/persons/{} called", id);
-        if (personService.findById(id).isEmpty()) {
-            log.error("Person with id {} not found for delete", id);
-        }
         personService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 }

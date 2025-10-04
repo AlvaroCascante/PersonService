@@ -22,6 +22,7 @@ This document specifies the default set of rules for Copilot to use when generat
 - For each Model create a ModelNameResponseView class that would contain these two classes
   - `public static class ModelNameList extends ResponseView.Always {}`
   - `public static class ModelNameDetail extends ModelNameList {}`
+- Annotate fields in Model classes with `@@Column` even when the column name is the same.
 - Annotate Model classes and rest controllers with `@JsonView`, this would make the works instead the DTO's.
 - Annotate classes with Lombok annotations.
 - Use `@Slf4j` for logging, add informational logs on API calls and error logs for exceptions.
