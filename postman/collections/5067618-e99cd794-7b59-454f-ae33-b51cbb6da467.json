@@ -350,13 +350,13 @@
 		"type": "basic",
 		"basic": [
 			{
-				"key": "password",
-				"value": "password",
+				"key": "username",
+				"value": "admin",
 				"type": "string"
 			},
 			{
-				"key": "username",
-				"value": "user",
+				"key": "password",
+				"value": "password",
 				"type": "string"
 			}
 		]
@@ -365,7 +365,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "6adc9a9c-84e4-4d74-ab0f-e57236019643",
+				"id": "e484edbe-c5f5-45cc-8f14-5dd3b14aeb6d",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -377,7 +377,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "9fab5f11-4625-48d6-9226-d0d1e15f0401",
+				"id": "c01ddc26-8c22-45dc-a77e-2207b76c47ed",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
