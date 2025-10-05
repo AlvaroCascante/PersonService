@@ -13,5 +13,6 @@ CREATE TABLE persons_profiles (
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     created_by VARCHAR(100) NOT NULL,
     updated_at TIMESTAMP,
-    updated_by VARCHAR(100)
+    updated_by VARCHAR(100),
+    version BIGINT NOT NULL
 );

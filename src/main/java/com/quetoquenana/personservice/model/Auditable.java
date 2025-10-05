@@ -3,6 +3,7 @@ package com.quetoquenana.personservice.model;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public abstract class Auditable {
+
+    @Version
+    private Long version;
+
     @Column(name = "created_at", nullable = false)
     @JsonView(ApiBaseResponseView.Admin.class)
     private LocalDateTime createdAt;

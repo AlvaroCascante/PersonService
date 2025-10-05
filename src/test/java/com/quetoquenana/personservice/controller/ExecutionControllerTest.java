@@ -93,7 +93,7 @@ class ExecutionControllerTest {
         when(executionService.findById(executionId)).thenReturn(Optional.ofNullable(execution));
 
         // When: the controller's getExecutionById is called
-        ResponseEntity<ApiResponse> response = executionController.getExecutionById(executionId, Locale.ENGLISH);
+        ResponseEntity<ApiResponse> response = executionController.getExecutionById(executionId);
 
         // Then: the response should be 200 OK and contain the execution in ApiResponse.data
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -114,16 +114,16 @@ class ExecutionControllerTest {
     @Test
     void testGetExecutionById_NotFound_English() {
         when(executionService.findById(executionId)).thenReturn(Optional.empty());
-        when(messageSource.getMessage(eq("error.not.found"), any(), eq(Locale.ENGLISH))).thenReturn("Resource not found.");
-        assertThrows(com.quetoquenana.personservice.exception.RecordNotFoundException.class, () -> executionController.getExecutionById(executionId, Locale.ENGLISH));
+        when(messageSource.getMessage(eq("error.record.not.found"), any(), eq(Locale.ENGLISH))).thenReturn("Resource not found.");
+        assertThrows(com.quetoquenana.personservice.exception.RecordNotFoundException.class, () -> executionController.getExecutionById(executionId));
     }
 
     @Test
     void testGetExecutionById_NotFound_Spanish() {
         when(executionService.findById(executionId)).thenReturn(Optional.empty());
         Locale spanish = Locale.forLanguageTag("es");
-        when(messageSource.getMessage(eq("error.not.found"), any(), eq(spanish))).thenReturn("Recurso no encontrado.");
-        assertThrows(com.quetoquenana.personservice.exception.RecordNotFoundException.class, () -> executionController.getExecutionById(executionId, spanish));
+        when(messageSource.getMessage(eq("error.record.not.found"), any(), eq(spanish))).thenReturn("Recurso no encontrado.");
+        assertThrows(com.quetoquenana.personservice.exception.RecordNotFoundException.class, () -> executionController.getExecutionById(executionId));
     }
 
     @Test

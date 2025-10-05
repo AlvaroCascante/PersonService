@@ -1,7 +1,8 @@
-package com.quetoquenana.personservice.service;
+package com.quetoquenana.personservice.service.impl;
 
 import com.quetoquenana.personservice.model.Execution;
 import com.quetoquenana.personservice.repository.ExecutionRepository;
+import com.quetoquenana.personservice.service.ExecutionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;

@@ -47,13 +47,15 @@ public class ExecutionController {
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')") // Only ADMIN role can access
     @JsonView(Execution.ExecutionDetail.class)
-    public ResponseEntity<ApiResponse> getExecutionById(@PathVariable UUID id, Locale locale) {
+    public ResponseEntity<ApiResponse> getExecutionById(
+            @PathVariable UUID id
+    ) {
         log.info("GET /api/executions/{} called", id);
         return executionService.findById(id)
             .map(entity -> ResponseEntity.ok(new ApiResponse(entity)))
             .orElseGet(() -> {
                 log.error("Execution with id {} not found", id);
-                throw new RecordNotFoundException("record.not.found", null, locale);
+                throw new RecordNotFoundException();
             });
     }
 

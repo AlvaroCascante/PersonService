@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-public class Person extends Auditable{
+public class Person extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

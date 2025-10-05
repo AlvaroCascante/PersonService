@@ -1,12 +1,12 @@
-package com.quetoquenana.personservice.service;
+package com.quetoquenana.personservice.service.impl;
 
 import com.quetoquenana.personservice.exception.DuplicateRecordException;
 import com.quetoquenana.personservice.exception.ImmutableFieldModificationException;
 import com.quetoquenana.personservice.exception.RecordNotFoundException;
 import com.quetoquenana.personservice.model.Person;
-import com.quetoquenana.personservice.model.PersonProfile;
-import com.quetoquenana.personservice.repository.PersonProfileRepository;
 import com.quetoquenana.personservice.repository.PersonRepository;
+import com.quetoquenana.personservice.service.PersonService;
+import com.quetoquenana.personservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +22,6 @@ import java.util.UUID;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private final PersonProfileRepository personProfileRepository;
     private final UserService userService;
 
     @Override
@@ -39,6 +38,9 @@ public class PersonServiceImpl implements PersonService {
     public Optional<Person> findById(UUID id) {
         return personRepository.findById(id);
     }
+
+    @Override
+    public Optional<Person> findByIdNumber(String idNumber) { return personRepository.findByIdNumber(idNumber);}
 
     @Override
     public Person save(Person person) {
@@ -65,34 +67,33 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person update(UUID id, Person newPerson) {
         String username = userService.getCurrentUsername();
-        Person existingPerson = personRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("record.not.found"));
-        if (!existingPerson.getIdNumber().equals(newPerson.getIdNumber())) {
-            throw new ImmutableFieldModificationException("person.id.number.immutable");
-        }
-        // Only update allowed fields
-        existingPerson.setName(newPerson.getName());
-        existingPerson.setLastname(newPerson.getLastname());
-        existingPerson.setUpdatedAt(LocalDateTime.now());
-        existingPerson.setUpdatedBy(username);
-        return personRepository.save(existingPerson);
+        return personRepository.findById(id)
+            .map(existingPerson -> {
+                if (!existingPerson.getIdNumber().equals(newPerson.getIdNumber())) {
+                    throw new ImmutableFieldModificationException("person.id.number.immutable");
+                }
+                existingPerson.setName(newPerson.getName());
+                existingPerson.setLastname(newPerson.getLastname());
+                existingPerson.setUpdatedAt(LocalDateTime.now());
+                existingPerson.setUpdatedBy(username);
+                return personRepository.save(existingPerson);
+            })
+            .orElseThrow(RecordNotFoundException::new);
     }
 
     @Override
     public void deleteById(UUID id) {
         String username = userService.getCurrentUsername();
-        Person existingPerson = personRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("record.not.found"));
-        if (existingPerson.isActive()) {
-            existingPerson.setActive(true);
-            existingPerson.setUpdatedAt(LocalDateTime.now());
-            existingPerson.setUpdatedBy(username);
-            personRepository.save(existingPerson);
-        }
-    }
-
-    @Override
-    public Optional<Person> findByIdNumber(String idNumber) {
-        return personRepository.findByIdNumber(idNumber);
+        personRepository.findById(id)
+            .ifPresentOrElse(existingPerson -> {
+                if (existingPerson.isActive()) {
+                    existingPerson.setActive(false);
+                    existingPerson.setUpdatedAt(LocalDateTime.now());
+                    existingPerson.setUpdatedBy(username);
+                    personRepository.save(existingPerson);
+                }
+            }, () -> {
+                throw new RecordNotFoundException();
+            });
     }
 }

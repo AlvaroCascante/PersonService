@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -56,7 +55,7 @@ public class PersonController {
                 .map(entity -> ResponseEntity.ok(new ApiResponse(entity)))
                 .orElseGet(() -> {
                     log.error("Person with id {} not found", id);
-                    throw new RecordNotFoundException("record.not.found", null, locale);
+                    throw new RecordNotFoundException();
                 });
     }
 
@@ -69,7 +68,7 @@ public class PersonController {
                 .map(entity -> ResponseEntity.ok(new ApiResponse(entity)))
                 .orElseGet(() -> {
                     log.error("Person with idNumber {} not found", idNumber);
-                    throw new RecordNotFoundException("record.not.found", null, locale);
+                    throw new RecordNotFoundException();
                 });
     }
 

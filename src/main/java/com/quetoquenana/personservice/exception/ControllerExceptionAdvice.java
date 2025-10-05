@@ -41,4 +41,13 @@ public class ControllerExceptionAdvice {
         String message = messageSource.getMessage(ex.getMessage(), null, locale);
         return ResponseEntity.badRequest().body(new ApiResponse(message, HttpStatus.CONFLICT.value()));
     }
+
+    @ExceptionHandler(InactiveRecordException.class)
+    public ResponseEntity<ApiResponse> handleInactiveRecordException(
+            InactiveRecordException ex, Locale locale) {
+        log.error("Inactive record: {}", ex.getMessage());
+        String message = messageSource.getMessage(ex.getMessage(), null, locale);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiResponse(message, HttpStatus.BAD_REQUEST.value()));
+    }
 }

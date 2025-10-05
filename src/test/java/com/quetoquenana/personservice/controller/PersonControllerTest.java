@@ -61,7 +61,7 @@ class PersonControllerTest {
 
     @Test
     void testUpdatePerson_NotFound() {
-        when(personService.update(personId, person)).thenThrow(new RecordNotFoundException("record.not.found"));
+        when(personService.update(personId, person)).thenThrow(new RecordNotFoundException());
         assertThrows(RecordNotFoundException.class, () -> personController.updatePerson(personId, person));
     }
 
