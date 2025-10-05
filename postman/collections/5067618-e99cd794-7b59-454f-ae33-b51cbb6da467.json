@@ -266,7 +266,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Person Copy",
+					"name": "Add Person Profile",
 					"event": [
 						{
 							"listen": "prerequest",
