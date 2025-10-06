@@ -1,4 +1,4 @@
-package com.quetoquenana.personservice.controller;
+package com.quetoquenana.personservice.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quetoquenana.personservice.model.Person;
@@ -72,7 +72,7 @@ class PersonControllerIT {
 
         Person savedPerson = personRepository.findByIdNumber(TestEntityFactory.DEFAULT_ID_NUMBER).orElse(null);
         assertThat(savedPerson).isNotNull();
-        assertThat(savedPerson.getCreatedBy()).isEqualTo("integrationUser");
+        assertThat(savedPerson.getCreatedBy()).isEqualTo(DEFAULT_USER);
         assertThat(savedPerson.getCreatedAt()).isNotNull();
         assertThat(savedPerson.isActive()).isTrue();
     }
@@ -100,7 +100,7 @@ class PersonControllerIT {
         Person reactivatedPerson = personRepository.findByIdNumber(TestEntityFactory.DEFAULT_ID_NUMBER).orElse(null);
         assertThat(reactivatedPerson).isNotNull();
         assertThat(reactivatedPerson.isActive()).isTrue();
-        assertThat(reactivatedPerson.getUpdatedBy()).isEqualTo("integrationUser");
+        assertThat(reactivatedPerson.getUpdatedBy()).isEqualTo(DEFAULT_USER);
         assertThat(reactivatedPerson.getUpdatedAt()).isNotNull();
         assertThat(reactivatedPerson.getCreatedBy()).isEqualTo("oldUser");
     }
@@ -161,7 +161,7 @@ class PersonControllerIT {
         Person deletedPerson = personRepository.findById(person.getId()).orElse(null);
         assertThat(deletedPerson).isNotNull();
         assertThat(deletedPerson.isActive()).isFalse();
-        assertThat(deletedPerson.getUpdatedBy()).isEqualTo("integrationUser");
+        assertThat(deletedPerson.getUpdatedBy()).isEqualTo(DEFAULT_USER);
         assertThat(deletedPerson.getUpdatedAt()).isNotNull();
         assertThat(deletedPerson.getCreatedBy()).isEqualTo("creator");
     }

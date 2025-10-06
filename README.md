@@ -5,9 +5,9 @@ This repository is a template for creating new Spring Boot projects with a pre-c
 ## Project Information
 
 - **Group:** `com.quetoquenana`
-- **Artifact:** `template`
-- **Name:** `Template`
-- **Description:** Template to create new Spring Boot projects
+- **Artifact:** `person-service`
+- **Name:** `Person Service`
+- **Description:** Person Service Spring Boot project
 - **Package name:** `com.quetoquenana.template`
 
 ## Included Dependencies
@@ -19,6 +19,7 @@ This template includes the following dependencies by default (as listed in `pom.
 - **Spring Security** (`spring-boot-starter-security`): Authentication and authorization capabilities.
 - **Spring Web** (`spring-boot-starter-web`): Build RESTful web services and web applications.
 - **Spring Boot Test** (`spring-boot-starter-test`, test scope): Testing support for Spring Boot applications.
+- **Testcontainers** (`testcontainers`, test scope): Containerized integration testing with real databases (PostgreSQL).
 - **Spring HATEOAS** (`spring-boot-starter-hateoas`): Hypermedia-driven REST APIs.
 - **Flyway Core** (`flyway-core`): Database schema migrations.
 - **Flyway PostgreSQL Database Support** (`flyway-database-postgresql`): Flyway support for PostgreSQL.
@@ -81,6 +82,24 @@ public String getWelcomeMessage(Locale locale) {
     return messageSource.getMessage("welcome.message", null, locale);
 }
 ```
+
+## Testing
+
+This project includes both unit and integration tests:
+
+- **Unit Tests:** Fast tests that mock dependencies and verify business logic in isolation.
+- **Integration Tests:** Use [Testcontainers](https://www.testcontainers.org/) to spin up real PostgreSQL containers for end-to-end testing of the application, including database interactions and REST endpoints.
+- **Test Structure:**
+  - Unit tests are located in `src/test/java/com/quetoquenana/personservice/controller/` and other relevant packages.
+  - Integration tests use `@SpringBootTest` or `@Testcontainers` and are named with the `IT` suffix (e.g., `PersonControllerIT`).
+
+To run all tests:
+
+```bash
+./mvnw test
+```
+
+Testcontainers will automatically start and stop containers as needed during integration tests.
 
 ## Getting Started
 

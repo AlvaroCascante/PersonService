@@ -1,4 +1,4 @@
-package com.quetoquenana.personservice.controller;
+package com.quetoquenana.personservice.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quetoquenana.personservice.model.Person;
