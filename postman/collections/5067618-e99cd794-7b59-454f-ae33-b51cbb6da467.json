@@ -520,15 +520,6 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"category\": \"WORK\",\n    \"isMain\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
 							"host": [
@@ -544,7 +535,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+									"value": "f458f99f-ada7-4130-9610-747255f890a3"
 								}
 							]
 						}
