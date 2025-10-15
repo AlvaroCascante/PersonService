@@ -266,7 +266,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Person Copy",
+					"name": "Delete Person",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -286,7 +286,7 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
