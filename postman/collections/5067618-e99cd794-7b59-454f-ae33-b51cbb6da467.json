@@ -550,7 +550,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"raw": "{\n  \"birthday\": \"1990-05-15\",\n  \"gender\": \"Male\",\n  \"nationality\": \"Canadian\",\n  \"maritalStatus\": \"Single\",\n  \"occupation\": \"Software Engineer\",\n  \"profilePictureUrl\": \"https://example.com/profile.jpg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -558,7 +558,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/:id/phone",
+							"raw": "{{HOST}}/{{path}}/api/persons/:id/profile",
 							"host": [
 								"{{HOST}}"
 							],
@@ -567,13 +567,12 @@
 								"api",
 								"persons",
 								":id",
-								"phone"
+								"profile"
 							],
 							"variable": [
 								{
-									"id": "75fd5c6d-eb7b-43a4-8a94-1570627d47bd",
 									"key": "id",
-									"value": "9fbe6619-5498-435c-864b-7072da3ea6b8"
+									"value": "de4772d2-adc3-4d45-acec-9ea499f19849"
 								}
 							]
 						}
