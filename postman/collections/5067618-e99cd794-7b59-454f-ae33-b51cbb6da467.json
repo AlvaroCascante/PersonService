@@ -540,7 +540,7 @@
 			"name": "Profiles",
 			"item": [
 				{
-					"name": "Add Phone",
+					"name": "Add Profile",
 					"id": "5067618-07eae7d0-5738-4bb3-af54-574681055d95",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
