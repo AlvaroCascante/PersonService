@@ -429,6 +429,24 @@
 			"id": "5067618-1154a951-6b02-45af-bf0d-ec16174f0af2"
 		},
 		{
+			"name": "Phones",
+			"item": [
+				{
+					"name": "Add Phone",
+					"id": "5067618-4954e4aa-68db-4e8b-8cc2-e67cf08cb29b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-126000b3-f18a-4e4f-827c-507232cda14c"
+		},
+		{
 			"name": "Health Check",
 			"id": "5067618-c5962757-314e-42fd-9370-a24ff94cf571",
 			"protocolProfileBehavior": {
@@ -448,18 +466,6 @@
 						"health"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Phone",
-			"id": "5067618-4954e4aa-68db-4e8b-8cc2-e67cf08cb29b",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": []
 			},
 			"response": []
 		}
