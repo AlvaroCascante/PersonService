@@ -472,7 +472,7 @@
 					"response": []
 				},
 				{
-					"name": "Add Phone Copy",
+					"name": "Update Phone",
 					"id": "5067618-c7b721f6-9b88-474e-931c-f314b13544f4",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
