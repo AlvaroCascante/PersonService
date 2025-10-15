@@ -510,6 +510,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Phone",
+					"id": "5067618-9f8e9433-8656-4bd2-bcc5-a3b03de87b74",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"category\": \"WORK\",\n    \"isMain\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"phone",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "5067618-126000b3-f18a-4e4f-827c-507232cda14c"
