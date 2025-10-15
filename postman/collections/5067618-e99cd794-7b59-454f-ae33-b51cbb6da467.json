@@ -572,7 +572,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "de4772d2-adc3-4d45-acec-9ea499f19849"
+									"value": "b06032b8-530a-457c-afc4-cbb113893d07"
 								}
 							]
 						}
@@ -590,7 +590,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"category\": \"WORK\",\n    \"isMain\": true\n}",
+							"raw": "{\n  \"birthday\": \"1990-05-15\",\n  \"gender\": \"Male\",\n  \"nationality\": \"Canadian\",\n  \"maritalStatus\": \"Maried\",\n  \"occupation\": \"Software Engineer\",\n  \"profilePictureUrl\": \"https://example.com/profile.jpg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -598,7 +598,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"raw": "{{HOST}}/{{path}}/api/persons/profile/:id",
 							"host": [
 								"{{HOST}}"
 							],
@@ -606,14 +606,13 @@
 								"{{path}}",
 								"api",
 								"persons",
-								"phone",
+								"profile",
 								":id"
 							],
 							"variable": [
 								{
-									"id": "5173dca5-95f5-41e1-94e2-9e479ffacee2",
 									"key": "id",
-									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+									"value": "431df104-83ef-4266-8265-146dda08f4be"
 								}
 							]
 						}
