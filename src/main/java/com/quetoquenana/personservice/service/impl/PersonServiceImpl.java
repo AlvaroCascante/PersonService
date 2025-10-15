@@ -1,7 +1,8 @@
 package com.quetoquenana.personservice.service.impl;
 
+import com.quetoquenana.personservice.dto.PersonCreateRequest;
+import com.quetoquenana.personservice.dto.PersonUpdateRequest;
 import com.quetoquenana.personservice.exception.DuplicateRecordException;
-import com.quetoquenana.personservice.exception.ImmutableFieldModificationException;
 import com.quetoquenana.personservice.exception.RecordNotFoundException;
 import com.quetoquenana.personservice.model.Person;
 import com.quetoquenana.personservice.repository.PersonRepository;
@@ -43,9 +44,9 @@ public class PersonServiceImpl implements PersonService {
     public Optional<Person> findByIdNumber(String idNumber) { return personRepository.findByIdNumber(idNumber);}
 
     @Override
-    public Person save(Person person) {
+    public Person save(PersonCreateRequest request) {
         String username = userService.getCurrentUsername();
-        return personRepository.findByIdNumber(person.getIdNumber())
+        return personRepository.findByIdNumber(request.getIdNumber())
             .map(found -> {
                 if (found.isActive()) {
                     throw new DuplicateRecordException("person.id.number.duplicate.active");
@@ -57,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
                 }
             })
             .orElseGet(() -> {
-                person.setActive(true);
+                Person person = Person.fromCreateRequest(request);
                 person.setCreatedAt(LocalDateTime.now());
                 person.setCreatedBy(username);
                 return personRepository.save(person);
@@ -65,35 +66,23 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person update(UUID id, Person newPerson) {
-        String username = userService.getCurrentUsername();
-        return personRepository.findById(id)
-            .map(existingPerson -> {
-                if (!existingPerson.getIdNumber().equals(newPerson.getIdNumber())) {
-                    throw new ImmutableFieldModificationException("person.id.number.immutable");
-                }
-                existingPerson.setName(newPerson.getName());
-                existingPerson.setLastname(newPerson.getLastname());
-                existingPerson.setUpdatedAt(LocalDateTime.now());
-                existingPerson.setUpdatedBy(username);
-                return personRepository.save(existingPerson);
-            })
+    public Person update(UUID id, PersonUpdateRequest request) {
+        Person existingPerson = personRepository.findById(id)
             .orElseThrow(RecordNotFoundException::new);
+        existingPerson.updateFromRequest(request, userService.getCurrentUsername());
+        return personRepository.save(existingPerson);
     }
 
     @Override
     public void deleteById(UUID id) {
         String username = userService.getCurrentUsername();
-        personRepository.findById(id)
-            .ifPresentOrElse(existingPerson -> {
-                if (existingPerson.isActive()) {
-                    existingPerson.setActive(false);
-                    existingPerson.setUpdatedAt(LocalDateTime.now());
-                    existingPerson.setUpdatedBy(username);
-                    personRepository.save(existingPerson);
-                }
-            }, () -> {
-                throw new RecordNotFoundException();
-            });
+        Person existingPerson = personRepository.findById(id)
+                .orElseThrow(RecordNotFoundException::new);
+        if (existingPerson.isActive()) {
+            existingPerson.setActive(false);
+            existingPerson.setUpdatedAt(LocalDateTime.now());
+            existingPerson.setUpdatedBy(username);
+            personRepository.save(existingPerson);
+        }
     }
 }

@@ -1,4 +1,4 @@
--- Migration for creating the person table
+-- Migration for creating the persons table
 CREATE TABLE persons (
     id UUID PRIMARY KEY,
     id_number VARCHAR(255) NOT NULL UNIQUE,

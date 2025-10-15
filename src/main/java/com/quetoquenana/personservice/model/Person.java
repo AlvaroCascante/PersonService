@@ -1,9 +1,14 @@
 package com.quetoquenana.personservice.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.quetoquenana.personservice.dto.PersonCreateRequest;
+import com.quetoquenana.personservice.dto.PersonUpdateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -34,14 +39,47 @@ public class Person extends Auditable {
     private String lastname;
 
     @Column(name = "is_active", nullable = false)
-    @JsonView(PersonDetail.class)
+    @JsonView(PersonList.class)
     private boolean isActive;
 
     @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     @JsonView(PersonDetail.class)
-    private PersonProfile personProfile;
+    private Profile profile;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonView(PersonDetail.class)
+    private Set<Phone> phones = new HashSet<>();
 
     // JSON Views to control serialization responses
     public static class PersonList extends ApiBaseResponseView.Always {}
     public static class PersonDetail extends Person.PersonList {}
+
+    public void addPhone(Phone phone) {
+        if (phones == null) {
+            phones = new HashSet<>();
+        }
+        phones.add(phone);
+        phone.setPerson(this);
+    }
+
+    public static Person fromCreateRequest(PersonCreateRequest request) {
+        return Person.builder()
+            .idNumber(request.getIdNumber())
+            .name(request.getName())
+            .lastname(request.getLastname())
+            .isActive(request.getIsActive() != null ? request.getIsActive() : true)
+            .build();
+    }
+
+    /**
+     * Updates this Person with the non-null fields from the given PersonUpdateRequest.
+     */
+    public void updateFromRequest(PersonUpdateRequest request, String username) {
+        if (request.getName() != null) this.setName(request.getName());
+        if (request.getLastname() != null) this.setLastname(request.getLastname());
+        if (request.getIsActive() != null) this.setActive(request.getIsActive());
+
+        this.setUpdatedAt(LocalDateTime.now());
+        this.setUpdatedBy(username);
+    }
 }

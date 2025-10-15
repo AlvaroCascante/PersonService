@@ -1,5 +1,5 @@
--- Migration to create person_profiles table
-CREATE TABLE persons_profiles (
+-- Migration to create profiles table
+CREATE TABLE profiles (
     id UUID PRIMARY KEY,
     id_person UUID UNIQUE REFERENCES persons(id) ON DELETE CASCADE,
 

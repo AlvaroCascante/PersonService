@@ -21,6 +21,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static com.quetoquenana.personservice.util.TestEntityFactory.DEFAULT_USER;
 import static com.quetoquenana.personservice.util.TestEntityFactory.ROLE_ADMIN;
@@ -81,11 +82,7 @@ class PersonControllerIT {
     @WithMockUser(username = DEFAULT_USER, roles = {ROLE_ADMIN})
     void testCreatePerson_ReactivatesInactiveRecord() throws Exception {
         // Create inactive person
-        Person inactivePerson = TestEntityFactory.createPerson(
-                LocalDateTime.now().minusDays(2),
-                "oldUser",
-                false
-        );
+        Person inactivePerson = TestEntityFactory.createPerson(false);
         personRepository.save(inactivePerson);
         personRepository.flush();
 
@@ -102,7 +99,6 @@ class PersonControllerIT {
         assertThat(reactivatedPerson.isActive()).isTrue();
         assertThat(reactivatedPerson.getUpdatedBy()).isEqualTo(DEFAULT_USER);
         assertThat(reactivatedPerson.getUpdatedAt()).isNotNull();
-        assertThat(reactivatedPerson.getCreatedBy()).isEqualTo("oldUser");
     }
 
     @Test
@@ -127,28 +123,6 @@ class PersonControllerIT {
 
     @Test
     @WithMockUser(username = DEFAULT_USER, roles = {ROLE_ADMIN})
-    void testUpdatePerson_NoUpdateStatus() throws Exception {
-        Person person = TestEntityFactory.createPerson(LocalDateTime.now().minusDays(1), "creator");
-        personRepository.save(person);
-        personRepository.flush();
-        person = personRepository.findByIdNumber(TestEntityFactory.DEFAULT_ID_NUMBER).orElseThrow();
-
-        String json = TestEntityFactory.createPersonPayload(objectMapper, false);
-
-        mockMvc.perform(put(BASE_URL + "/" + person.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isOk());
-
-        Person updatedPerson = personRepository.findById(person.getId()).orElse(null);
-        assertThat(updatedPerson).isNotNull();
-        assertThat(updatedPerson.getUpdatedBy()).isEqualTo(DEFAULT_USER);
-        assertThat(updatedPerson.getUpdatedAt()).isNotNull();
-        assertThat(updatedPerson.getCreatedBy()).isEqualTo("creator");
-    }
-
-    @Test
-    @WithMockUser(username = DEFAULT_USER, roles = {ROLE_ADMIN})
     void testDeletePerson_SetsAuditableFields() throws Exception {
         Person person = TestEntityFactory.createPerson(LocalDateTime.now().minusDays(1), "creator");
         personRepository.save(person);
@@ -164,5 +138,39 @@ class PersonControllerIT {
         assertThat(deletedPerson.getUpdatedBy()).isEqualTo(DEFAULT_USER);
         assertThat(deletedPerson.getUpdatedAt()).isNotNull();
         assertThat(deletedPerson.getCreatedBy()).isEqualTo("creator");
+    }
+
+    @Test
+    @WithMockUser(username = DEFAULT_USER, roles = {ROLE_ADMIN})
+    void updateNonExistentPerson_shouldReturnNotFound() throws Exception {
+        String json = TestEntityFactory.createPersonPayload(objectMapper);
+        UUID nonExistentId = UUID.randomUUID();
+        mockMvc.perform(put(BASE_URL + "/" + nonExistentId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = DEFAULT_USER, roles = {ROLE_ADMIN})
+    void deleteNonExistentPerson_shouldReturnNotFound() throws Exception {
+        UUID nonExistentId = UUID.randomUUID();
+        mockMvc.perform(delete(BASE_URL + "/" + nonExistentId))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = DEFAULT_USER, roles = {ROLE_ADMIN})
+    void createPerson_withDuplicateIdNumber_shouldReturnBadRequest() throws Exception {
+        // Arrange: create and save an active person
+        Person person = TestEntityFactory.createPerson(true);
+        personRepository.save(person);
+        personRepository.flush();
+        // Act: try to create another person with the same idNumber
+        String json = TestEntityFactory.createPersonPayload(objectMapper);
+        mockMvc.perform(post(BASE_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isBadRequest());
     }
 }

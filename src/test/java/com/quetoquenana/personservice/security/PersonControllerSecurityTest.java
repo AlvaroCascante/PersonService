@@ -1,6 +1,7 @@
-package com.quetoquenana.personservice.controller;
+package com.quetoquenana.personservice.security;
 
 import com.quetoquenana.personservice.config.SecurityConfig;
+import com.quetoquenana.personservice.controller.PersonController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

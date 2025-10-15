@@ -2,7 +2,11 @@ package com.quetoquenana.personservice.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quetoquenana.personservice.model.Person;
-import com.quetoquenana.personservice.model.PersonProfile;
+import com.quetoquenana.personservice.model.PhoneCategory;
+import com.quetoquenana.personservice.model.Profile;
+import com.quetoquenana.personservice.model.Phone;
+import com.quetoquenana.personservice.dto.PersonCreateRequest;
+import com.quetoquenana.personservice.dto.PersonUpdateRequest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,27 +17,40 @@ public class TestEntityFactory {
     public static final String DEFAULT_USER = "testUser";
     public static final String ROLE_ADMIN = "ADMIN";
 
-    public static Person createPerson(
-    ) {
+    public static Person createPerson() {
         return createPerson(LocalDateTime.now(), DEFAULT_USER);
+    }
+
+    public static Person createPerson(
+            Boolean isActive
+    ) {
+        return createPerson(LocalDateTime.now(), DEFAULT_USER, DEFAULT_ID_NUMBER, isActive);
+    }
+
+    public static Person createPerson(
+            String idNumber,
+            Boolean isActive
+    ) {
+        return createPerson(LocalDateTime.now(), DEFAULT_USER, idNumber, isActive);
     }
 
     public static Person createPerson(
             LocalDateTime createdAt,
             String createdBy
     ) {
-        return createPerson(createdAt, createdBy, true);
+        return createPerson(createdAt, createdBy, DEFAULT_ID_NUMBER, true);
     }
 
     public static Person createPerson(
             LocalDateTime createdAt,
             String createdBy,
+            String idNumber,
             Boolean isActive
     ) {
         Person person = Person.builder()
                 .name("John")
                 .lastname("White")
-                .idNumber(DEFAULT_ID_NUMBER)
+                .idNumber(idNumber)
                 .isActive(isActive)
                 .build();
         person.setCreatedAt(createdAt);
@@ -41,30 +58,52 @@ public class TestEntityFactory {
         return person;
     }
 
-    public static String createPersonPayload(ObjectMapper objectMapper, boolean isActive) {
-        return createPersonPayload(objectMapper, DEFAULT_ID_NUMBER, isActive);
+    public static PersonCreateRequest getPersonCreateRequest(String idNumber, Boolean isActive) {
+        PersonCreateRequest req = new PersonCreateRequest();
+        req.setIdNumber(idNumber);
+        req.setName("John");
+        req.setLastname("White");
+        req.setIsActive(isActive);
+        return req;
     }
 
     public static String createPersonPayload(ObjectMapper objectMapper) {
-        return createPersonPayload(objectMapper, DEFAULT_ID_NUMBER, true);
-    }
-
-    public static String createPersonPayload(ObjectMapper objectMapper, String idNumber, boolean isActive) {
-        Person personPayload = Person.builder()
-                .name("John")
-                .lastname("Doe")
-                .idNumber(idNumber)
-                .isActive(isActive)
-                .build();
         try {
-            return objectMapper.writeValueAsString(personPayload);
+            PersonCreateRequest req = getPersonCreateRequest(DEFAULT_ID_NUMBER, true);
+            return objectMapper.writeValueAsString(req);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static PersonProfile createPersonProfile(Person person) {
-        PersonProfile profile = PersonProfile.builder()
+    public static String createPersonPayload(ObjectMapper objectMapper, boolean isActive) {
+        try {
+            PersonCreateRequest req = getPersonCreateRequest(DEFAULT_ID_NUMBER, isActive);
+            return objectMapper.writeValueAsString(req);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static PersonUpdateRequest getPersonUpdateRequest(Boolean isActive) {
+        PersonUpdateRequest req = new PersonUpdateRequest();
+        req.setName("John");
+        req.setLastname("White");
+        req.setIsActive(isActive);
+        return req;
+    }
+
+    public static String createPersonUpdatePayload(ObjectMapper objectMapper, Boolean isActive) {
+        try {
+            PersonUpdateRequest req = getPersonUpdateRequest(isActive);
+            return objectMapper.writeValueAsString(req);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Profile createProfile(Person person) {
+        Profile profile = Profile.builder()
                 .person(person)
                 .birthday(LocalDate.of(1990, 1, 1))
                 .gender("M")
@@ -78,8 +117,8 @@ public class TestEntityFactory {
         return profile;
     }
 
-    public static String createPersonProfilePayload(ObjectMapper objectMapper) {
-        PersonProfile profilePayload = PersonProfile.builder()
+    public static String createProfilePayload(ObjectMapper objectMapper) {
+        Profile profilePayload = Profile.builder()
                 .birthday(LocalDate.of(1990, 1, 1))
                 .gender("M")
                 .nationality("TestNationality")
@@ -91,6 +130,23 @@ public class TestEntityFactory {
             return objectMapper.writeValueAsString(profilePayload);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Phone createPhone(Person person, String phoneNumber) {
+        return Phone.builder()
+                .person(person)
+                .category(PhoneCategory.HOME)
+                .isMain(true)
+                .phoneNumber(phoneNumber)
+                .build();
+    }
+
+    public static String createPhonePayload(ObjectMapper objectMapper, String phoneNumber) {
+        try {
+            return objectMapper.writeValueAsString(createPhone(null, phoneNumber));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to serialize phone payload", e);
         }
     }
 }

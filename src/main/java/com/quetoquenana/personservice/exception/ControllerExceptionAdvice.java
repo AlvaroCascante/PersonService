@@ -38,15 +38,25 @@ public class ControllerExceptionAdvice {
     public ResponseEntity<ApiResponse> handleDuplicateRecordException(
             DuplicateRecordException ex, Locale locale) {
         log.error("Duplicate record: {}", ex.getMessage());
-        String message = messageSource.getMessage(ex.getMessage(), null, locale);
-        return ResponseEntity.badRequest().body(new ApiResponse(message, HttpStatus.CONFLICT.value()));
+        String message = messageSource.getMessage(ex.getMessageKey(), ex.getMessageArgs(), locale);
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ApiResponse(message, HttpStatus.CONFLICT.value()));
     }
 
     @ExceptionHandler(InactiveRecordException.class)
     public ResponseEntity<ApiResponse> handleInactiveRecordException(
             InactiveRecordException ex, Locale locale) {
         log.error("Inactive record: {}", ex.getMessage());
-        String message = messageSource.getMessage(ex.getMessage(), null, locale);
+        String message = messageSource.getMessage(ex.getMessageKey(), ex.getMessageArgs(), locale);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiResponse(message, HttpStatus.BAD_REQUEST.value()));
+    }
+
+    @ExceptionHandler(RecordNotDeletableException.class)
+    public ResponseEntity<ApiResponse> handleRecordNotDeletableException(
+            RecordNotDeletableException ex, Locale locale) {
+        log.error("Record not deletable: {}", ex.getMessage());
+        String message = messageSource.getMessage(ex.getMessageKey(), ex.getMessageArgs(), locale);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ApiResponse(message, HttpStatus.BAD_REQUEST.value()));
     }

@@ -1,7 +1,8 @@
-package com.quetoquenana.personservice.controller;
+package com.quetoquenana.personservice.security;
 
 import com.quetoquenana.personservice.config.SecurityConfig;
-import com.quetoquenana.personservice.service.PersonProfileService;
+import com.quetoquenana.personservice.controller.ProfileController;
+import com.quetoquenana.personservice.service.ProfileService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +13,17 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.UUID;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(PersonProfileController.class)
+@WebMvcTest(ProfileController.class)
 @Import(SecurityConfig.class)
-class PersonProfileControllerSecurityTest {
+class ProfileControllerSecurityTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private PersonProfileService personProfileService;
+    private ProfileService profileService;
 
     private static final String PROFILE_PAYLOAD = "{\"gender\":\"M\"}";
     private static final String PERSON_ID = "00000000-0000-0000-0000-000000000000";
