@@ -442,7 +442,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": \"true\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
