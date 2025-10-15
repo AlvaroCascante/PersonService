@@ -580,7 +580,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Phone",
+					"name": "Update Profile",
 					"id": "5067618-90191353-fb1d-4d80-9044-8385efef7c18",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
