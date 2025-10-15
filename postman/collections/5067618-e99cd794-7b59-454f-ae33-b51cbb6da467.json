@@ -182,7 +182,7 @@
 							"variable": [
 								{
 									"key": "idNumber",
-									"value": "ce9b162c-41d0-4743-a86d-f90fb7a48081"
+									"value": "3c2f2844-02da-42c9-8670-a94c5d462306"
 								}
 							]
 						}
@@ -212,8 +212,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "56bcf4df-9139-4511-8467-184e9ab1d541",
-									"description": "7913ee2c-f065-49b6-b267-ce3f8f10092c -> isActive=false"
+									"value": "de4772d2-adc3-4d45-acec-9ea499f19849"
 								}
 							]
 						}
@@ -267,6 +266,50 @@
 					"response": []
 				},
 				{
+					"name": "Delete Person",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ae3391c6-46ba-4e32-9349-809da0571879",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "5067618-ef1078eb-bcac-4637-85cf-91d82033ef65",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b06032b8-530a-457c-afc4-cbb113893d06"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add Person Profile",
 					"event": [
 						{
@@ -291,7 +334,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"raw": "{\n    \"birthday\": \"1990-05-15\",\n    \"gender\": \"M\",\n    \"nationality\": \"Spanish\",\n    \"maritalStatus\": \"Single\",\n    \"occupation\": \"Engineer\",\n    \"profilePictureUrl\": \"https://example.com/profile.jpg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -299,14 +342,22 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons",
+							"raw": "{{HOST}}/{{path}}/api/persons/:idPerson/profile",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"{{path}}",
 								"api",
-								"persons"
+								"persons",
+								":idPerson",
+								"profile"
+							],
+							"variable": [
+								{
+									"key": "idPerson",
+									"value": "56bcf4df-9139-4511-8467-184e9ab1d541"
+								}
 							]
 						}
 					},
@@ -337,7 +388,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idNumber\": \"c677b082-a314-43a2-9ff2-2d07e0dbf030\",\n    \"name\": \"Myler\",\n    \"lastname\": \"Meichel\"\n}",
+							"raw": "{\n    \"lastname\": \"Keefe\",\n    \"unknown\": \"Yes\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,7 +409,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "74d361d0-cea9-4753-9446-e67565e9f91a"
+									"value": "9fbe6619-5498-435c-864b-7072da3ea6b8"
 								}
 							]
 						}
@@ -367,6 +418,241 @@
 				}
 			],
 			"id": "5067618-1154a951-6b02-45af-bf0d-ec16174f0af2"
+		},
+		{
+			"name": "Phones",
+			"item": [
+				{
+					"name": "Add Phone",
+					"id": "5067618-4954e4aa-68db-4e8b-8cc2-e67cf08cb29b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id/phone",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id",
+								"phone"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9fbe6619-5498-435c-864b-7072da3ea6b8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Phone",
+					"id": "5067618-c7b721f6-9b88-474e-931c-f314b13544f4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"category\": \"WORK\",\n    \"isMain\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"phone",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Phone",
+					"id": "5067618-9f8e9433-8656-4bd2-bcc5-a3b03de87b74",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"phone",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-126000b3-f18a-4e4f-827c-507232cda14c"
+		},
+		{
+			"name": "Profiles",
+			"item": [
+				{
+					"name": "Add Profile",
+					"id": "5067618-07eae7d0-5738-4bb3-af54-574681055d95",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"birthday\": \"1990-05-15\",\n  \"gender\": \"Male\",\n  \"nationality\": \"Canadian\",\n  \"maritalStatus\": \"Single\",\n  \"occupation\": \"Software Engineer\",\n  \"profilePictureUrl\": \"https://example.com/profile.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id/profile",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id",
+								"profile"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b06032b8-530a-457c-afc4-cbb113893d07"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"id": "5067618-90191353-fb1d-4d80-9044-8385efef7c18",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"birthday\": \"1990-05-15\",\n  \"gender\": \"Male\",\n  \"nationality\": \"Canadian\",\n  \"maritalStatus\": \"Maried\",\n  \"occupation\": \"Software Engineer\",\n  \"profilePictureUrl\": \"https://example.com/profile.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/profile/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"profile",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "431df104-83ef-4266-8265-146dda08f4be"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Phone",
+					"id": "5067618-3468fe4a-dd2b-48bd-ab5d-24d2836efd84",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"phone",
+								":id"
+							],
+							"variable": [
+								{
+									"id": "cff22a41-e302-4627-8b09-09b655215701",
+									"key": "id",
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-ca17f899-2703-40b1-9ab7-ee93a8205f3b"
 		},
 		{
 			"name": "Health Check",
