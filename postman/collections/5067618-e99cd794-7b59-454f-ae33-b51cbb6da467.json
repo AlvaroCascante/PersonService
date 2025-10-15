@@ -470,6 +470,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add Phone Copy",
+					"id": "5067618-c7b721f6-9b88-474e-931c-f314b13544f4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id/phone",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id",
+								"phone"
+							],
+							"variable": [
+								{
+									"id": "541102ab-fbbc-400b-a5ed-ebce7fdc8541",
+									"key": "id",
+									"value": "de4772d2-adc3-4d45-acec-9ea499f19849"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "5067618-126000b3-f18a-4e4f-827c-507232cda14c"
