@@ -537,6 +537,126 @@
 			"id": "5067618-126000b3-f18a-4e4f-827c-507232cda14c"
 		},
 		{
+			"name": "Addresses",
+			"item": [
+				{
+					"name": "Add Address",
+					"id": "5067618-510c72a8-a35c-4a82-9a1b-e15911110715",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/:id/phone",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								":id",
+								"phone"
+							],
+							"variable": [
+								{
+									"id": "cd60d76c-b574-4e74-8733-93d59071bdd1",
+									"key": "id",
+									"value": "9fbe6619-5498-435c-864b-7072da3ea6b8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Phone",
+					"id": "5067618-82b719d0-c36b-4eec-96d2-862acd7dbe00",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"category\": \"WORK\",\n    \"isMain\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"phone",
+								":id"
+							],
+							"variable": [
+								{
+									"id": "b7373572-9eca-4e0d-928b-6d3bb429b20c",
+									"key": "id",
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Phone",
+					"id": "5067618-1e604a8f-d0fe-4ddd-9be6-a3344647b434",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"{{path}}",
+								"api",
+								"persons",
+								"phone",
+								":id"
+							],
+							"variable": [
+								{
+									"id": "c095dc7b-0a96-480b-a927-cd6e5ccbec30",
+									"key": "id",
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5067618-21b81916-d173-4968-bb8d-3e2f5c76c2dc"
+		},
+		{
 			"name": "Profiles",
 			"item": [
 				{
