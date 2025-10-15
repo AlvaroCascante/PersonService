@@ -478,11 +478,11 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"raw": "{\n    \"category\": \"WORK\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -490,7 +490,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/:id/phone",
+							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
 							"host": [
 								"{{HOST}}"
 							],
@@ -498,14 +498,13 @@
 								"{{path}}",
 								"api",
 								"persons",
-								":id",
-								"phone"
+								"phone",
+								":id"
 							],
 							"variable": [
 								{
-									"id": "541102ab-fbbc-400b-a5ed-ebce7fdc8541",
 									"key": "id",
-									"value": "de4772d2-adc3-4d45-acec-9ea499f19849"
+									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
 								}
 							]
 						}
