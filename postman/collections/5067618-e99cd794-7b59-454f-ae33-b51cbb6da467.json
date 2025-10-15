@@ -291,7 +291,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{$randomFirstName}}\",\n  \"lastname\": \"{{$randomLastName}}\",\n  \"idNumber\": \"{{$randomUUID}}\"\n}\n",
+							"raw": "{\n    \"birthday\": \"1990-05-15\",\n    \"gender\": \"M\",\n    \"nationality\": \"Spanish\",\n    \"maritalStatus\": \"Single\",\n    \"occupation\": \"Engineer\",\n    \"profilePictureUrl\": \"https://example.com/profile.jpg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -299,14 +299,22 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons",
+							"raw": "{{HOST}}/{{path}}/api/persons/:idPerson/profile",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"{{path}}",
 								"api",
-								"persons"
+								"persons",
+								":idPerson",
+								"profile"
+							],
+							"variable": [
+								{
+									"key": "idPerson",
+									"value": "56bcf4df-9139-4511-8467-184e9ab1d541"
+								}
 							]
 						}
 					},
