@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="PersonServiceApplication" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="com.quetoquenana.personservice.PersonServiceApplication" />
-    <module name="template" />
+    <module name="personService" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.quetoquenana.personservice.*" />
