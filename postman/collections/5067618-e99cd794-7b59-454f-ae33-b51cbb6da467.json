@@ -550,7 +550,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n  \"category\": \"HOME\",\n  \"isMain\": true\n}\n",
+							"raw": "{\n  \"address\": \"123 Main St, Apt 4B\",\n  \"country\": \"Spain\",\n  \"city\": \"Madrid\",\n  \"state\": \"Community of Madrid\",\n  \"zipCode\": \"28001\",\n  \"addressType\": \"HOME\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -558,7 +558,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/:id/phone",
+							"raw": "{{HOST}}/{{path}}/api/persons/:id/address",
 							"host": [
 								"{{HOST}}"
 							],
@@ -567,11 +567,10 @@
 								"api",
 								"persons",
 								":id",
-								"phone"
+								"address"
 							],
 							"variable": [
 								{
-									"id": "cd60d76c-b574-4e74-8733-93d59071bdd1",
 									"key": "id",
 									"value": "9fbe6619-5498-435c-864b-7072da3ea6b8"
 								}
