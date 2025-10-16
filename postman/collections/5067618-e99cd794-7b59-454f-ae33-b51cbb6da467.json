@@ -550,7 +550,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"address\": \"123 Main St, Apt 4B\",\n  \"country\": \"Spain\",\n  \"city\": \"Madrid\",\n  \"state\": \"Community of Madrid\",\n  \"zipCode\": \"28001\",\n  \"addressType\": \"HOME\"\n}\n",
+							"raw": "{\n  \"address\": \"123 Main St, Apt 4B\",\n  \"country\": \"Spain\",\n  \"city\": \"Madrid\",\n  \"state\": \"Community of Madrid\",\n  \"zipCode\": \"28001\",\n  \"addressType\": \"WORK\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
