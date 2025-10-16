@@ -590,7 +590,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"category\": \"WORK\",\n    \"isMain\": true\n}",
+							"raw": "{\n  \"address\": \"123 Main St, Apt 4B\",\n  \"country\": \"Spain\",\n  \"city\": \"Barcelona\",\n  \"state\": \"Community of Barcelona\",\n  \"zipCode\": \"28001\",\n  \"addressType\": \"HOME\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -598,7 +598,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"raw": "{{HOST}}/{{path}}/api/persons/address/:id",
 							"host": [
 								"{{HOST}}"
 							],
@@ -606,7 +606,7 @@
 								"{{path}}",
 								"api",
 								"persons",
-								"phone",
+								"address",
 								":id"
 							],
 							"variable": [
