@@ -738,7 +738,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Phone",
+					"name": "Delete Address",
 					"id": "5067618-3468fe4a-dd2b-48bd-ab5d-24d2836efd84",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -747,7 +747,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/{{path}}/api/persons/phone/:id",
+							"raw": "{{HOST}}/{{path}}/api/persons/address/:id",
 							"host": [
 								"{{HOST}}"
 							],
@@ -755,12 +755,11 @@
 								"{{path}}",
 								"api",
 								"persons",
-								"phone",
+								"address",
 								":id"
 							],
 							"variable": [
 								{
-									"id": "cff22a41-e302-4627-8b09-09b655215701",
 									"key": "id",
 									"value": "43ea2d48-7e05-4f7b-955b-6f5a50ffb3bb"
 								}
