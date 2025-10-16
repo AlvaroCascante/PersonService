@@ -50,6 +50,10 @@ public class Person extends Auditable {
     @JsonView(PersonDetail.class)
     private Set<Phone> phones = new HashSet<>();
 
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonView(PersonDetail.class)
+    private Set<Address> addresses = new HashSet<>();
+
     // JSON Views to control serialization responses
     public static class PersonList extends ApiBaseResponseView.Always {}
     public static class PersonDetail extends Person.PersonList {}
@@ -60,6 +64,14 @@ public class Person extends Auditable {
         }
         phones.add(phone);
         phone.setPerson(this);
+    }
+
+    public void addAddress(Address address) {
+        if (addresses == null) {
+            addresses = new HashSet<>();
+        }
+        addresses.add(address);
+        address.setPerson(this);
     }
 
     public static Person fromCreateRequest(PersonCreateRequest request) {

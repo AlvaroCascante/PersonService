@@ -19,6 +19,6 @@ public class StartupExecutionRecorder {
     @EventListener(ApplicationReadyEvent.class)
     public void recordExecutionOnStartup() {
         log.info("Application started, recording execution event.");
-        executionService.saveExecutionOnStartup();
+        //executionService.saveExecutionOnStartup();
     }
 }

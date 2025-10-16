@@ -28,6 +28,7 @@ This template includes the following dependencies by default (as listed in `pom.
 - **PostgreSQL Driver** (`postgresql`, runtime): Connects to PostgreSQL databases.
 - **Lombok** (`lombok`, optional): Simplifies Java code with annotations for boilerplate reduction.
 - **Spring Security Test** (`spring-security-test`, test scope): Testing support for Spring Security.
+- **Spring Boot Validation** (`spring-boot-starter-validation`): Validation support for DTOs and request payloads.
 
 ## Security Configuration
 
@@ -126,6 +127,18 @@ Testcontainers will automatically start and stop containers as needed during int
 - Update the `pom.xml` to add or remove dependencies as needed.
 - Modify the package structure and application properties to fit your requirements.
 - Extend the execution tracking feature or add new features as needed.
+
+## Use of DTOs for API Requests
+
+This project uses Data Transfer Objects (DTOs) to handle incoming API requests. Instead of exposing or accepting entity/model classes directly in controller endpoints, dedicated DTO classes are used for create and update operations (e.g., `PersonCreateRequest`, `PersonUpdateRequest`, `ProfileCreateRequest`, `ProfileUpdateRequest`, etc.).
+
+**Benefits:**
+- Only the intended fields are exposed and accepted from clients, improving security.
+- Validation annotations (such as `@NotNull`, `@NotBlank`) are applied directly to DTO fields for robust input validation.
+- The service layer is updated to accept these DTOs, and conversion logic is handled in the model or service classes.
+
+**Example:**
+When creating or updating a person or profile, the API expects a DTO payload rather than the full entity object. This ensures only updatable fields are processed and sensitive/internal fields are not exposed.
 
 ## License
 

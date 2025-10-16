@@ -1,10 +1,7 @@
 package com.quetoquenana.personservice.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quetoquenana.personservice.model.Person;
-import com.quetoquenana.personservice.model.PhoneCategory;
-import com.quetoquenana.personservice.model.Profile;
-import com.quetoquenana.personservice.model.Phone;
+import com.quetoquenana.personservice.model.*;
 import com.quetoquenana.personservice.dto.PersonCreateRequest;
 import com.quetoquenana.personservice.dto.PersonUpdateRequest;
 
@@ -141,10 +138,41 @@ public class TestEntityFactory {
                 .phoneNumber(phoneNumber)
                 .build();
     }
+    public static Address createAddress(Person person, String country) {
+        return Address.builder()
+                .person(person)
+                .addressType(AddressType.HOME)
+                .state("State")
+                .city("City")
+                .country(country)
+                .zipCode("12345")
+                .address("123 Main St")
+                .build();
+    }
+
+    public static Address createAddress(Person person) {
+        return createAddress(person, "Country");
+    }
 
     public static String createPhonePayload(ObjectMapper objectMapper, String phoneNumber) {
         try {
             return objectMapper.writeValueAsString(createPhone(null, phoneNumber));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to serialize phone payload", e);
+        }
+    }
+
+    public static String createAddressPayload(ObjectMapper objectMapper, String country) {
+        try {
+            return objectMapper.writeValueAsString(createAddress(null, country));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to serialize phone payload", e);
+        }
+    }
+
+    public static String createAddressPayload(ObjectMapper objectMapper) {
+        try {
+            return objectMapper.writeValueAsString(createAddress(null));
         } catch (Exception e) {
             throw new RuntimeException("Failed to serialize phone payload", e);
         }

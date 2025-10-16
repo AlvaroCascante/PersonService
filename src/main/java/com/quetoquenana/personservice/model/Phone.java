@@ -24,17 +24,17 @@ public class Phone {
     @JsonView(Person.PersonDetail.class)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "phone_number", nullable = false)
     @JsonView(Person.PersonDetail.class)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "category", nullable = false)
     @JsonView(Person.PersonDetail.class)
     @JdbcType(value = PostgreSQLEnumJdbcType.class)
     private PhoneCategory category;
 
-    @Column(nullable = false)
+    @Column(name = "is_main", nullable = false)
     @JsonView(Person.PersonDetail.class)
     private boolean isMain = false;
 

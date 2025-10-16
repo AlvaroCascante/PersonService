@@ -27,7 +27,8 @@ public class PhoneController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')") // ADMIN or USER roles can access
     public ResponseEntity<Phone> addPhone(
             @PathVariable UUID idPerson,
-            @RequestBody PhoneCreateRequest request) {
+            @RequestBody PhoneCreateRequest request
+    ) {
         log.info("POST /api/persons/{}/phone called with payload: {}", idPerson, request);
         Phone created = phoneService.addPhoneToPerson(idPerson, request);
         return ResponseEntity.ok(created);
@@ -38,7 +39,8 @@ public class PhoneController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')") // ADMIN or USER roles can access
     public ResponseEntity<Phone> updatePhone(
             @PathVariable UUID idPhone,
-            @RequestBody PhoneUpdateRequest request) {
+            @RequestBody PhoneUpdateRequest request
+    ) {
         log.info("PUT /api/persons/phone/{} called with payload: {}", idPhone, request);
         Phone updated = phoneService.updatePhone(idPhone, request);
         return ResponseEntity.ok(updated);
@@ -47,7 +49,7 @@ public class PhoneController {
     @DeleteMapping("/phone/{id}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')") // ADMIN or USER roles can access
     public ResponseEntity<Void> deletePhone(@PathVariable UUID id) {
-        log.info("DELETE /api/persons/{} called", id);
+        log.info("DELETE /api/persons/phone/{} called", id);
         phoneService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

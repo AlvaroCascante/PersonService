@@ -27,7 +27,7 @@ class PhoneControllerTest {
     private PhoneService phoneService;
 
     @InjectMocks
-    private PhoneController personPhoneController;
+    private PhoneController phoneController;
 
     private Phone phone;
     private UUID personId;
@@ -44,14 +44,12 @@ class PhoneControllerTest {
                 .phoneNumber("1234567890")
                 .isMain(true)
                 .build();
-
-        // Set required fields for Phone if needed
     }
 
     @Test
     void addPhone_shouldReturnPhone() {
         when(phoneService.addPhoneToPerson(eq(personId), any(PhoneCreateRequest.class))).thenReturn(phone);
-        ResponseEntity<Phone> response = personPhoneController.addPhone(personId, new PhoneCreateRequest());
+        ResponseEntity<Phone> response = phoneController.addPhone(personId, new PhoneCreateRequest());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(phone, response.getBody());
     }
@@ -59,7 +57,7 @@ class PhoneControllerTest {
     @Test
     void updatePhone_shouldReturnPhone() {
         when(phoneService.updatePhone(eq(phoneId), any(PhoneUpdateRequest.class))).thenReturn(phone);
-        ResponseEntity<Phone> response = personPhoneController.updatePhone(phoneId, new PhoneUpdateRequest());
+        ResponseEntity<Phone> response = phoneController.updatePhone(phoneId, new PhoneUpdateRequest());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(phone, response.getBody());
     }
@@ -67,7 +65,7 @@ class PhoneControllerTest {
     @Test
     void deletePhone_shouldReturnNoContent() {
         doNothing().when(phoneService).deleteById(phoneId);
-        ResponseEntity<?> response = personPhoneController.deletePhone(phoneId);
+        ResponseEntity<?> response = phoneController.deletePhone(phoneId);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertNull(response.getBody());
     }
@@ -76,45 +74,45 @@ class PhoneControllerTest {
     void addPhone_shouldThrowRecordNotFoundException() {
         when(phoneService.addPhoneToPerson(eq(personId), any(PhoneCreateRequest.class)))
                 .thenThrow(new RecordNotFoundException("Person not found"));
-        assertThrows(RecordNotFoundException.class, () ->
-                personPhoneController.addPhone(personId, new PhoneCreateRequest()));
+        assertThrows(RecordNotFoundException.class, () -> phoneController
+                .addPhone(personId, new PhoneCreateRequest()));
     }
 
     @Test
     void addPhone_shouldThrowInactiveRecordException() {
         when(phoneService.addPhoneToPerson(eq(personId), any(PhoneCreateRequest.class)))
                 .thenThrow(new InactiveRecordException("Person is inactive"));
-        assertThrows(InactiveRecordException.class, () ->
-                personPhoneController.addPhone(personId, new PhoneCreateRequest()));
+        assertThrows(InactiveRecordException.class, () -> phoneController
+                .addPhone(personId, new PhoneCreateRequest()));
     }
 
     @Test
     void updatePhone_shouldThrowRecordNotFoundException() {
         when(phoneService.updatePhone(eq(phoneId), any(PhoneUpdateRequest.class)))
                 .thenThrow(new RecordNotFoundException("Person not found"));
-        assertThrows(RecordNotFoundException.class, () ->
-                personPhoneController.updatePhone(phoneId, new PhoneUpdateRequest()));
+        assertThrows(RecordNotFoundException.class, () -> phoneController
+                .updatePhone(phoneId, new PhoneUpdateRequest()));
     }
 
     @Test
     void updatePhone_shouldThrowInactiveRecordException() {
         when(phoneService.updatePhone(eq(phoneId), any(PhoneUpdateRequest.class)))
                 .thenThrow(new InactiveRecordException("Person is inactive"));
-        assertThrows(InactiveRecordException.class, () ->
-                personPhoneController.updatePhone(phoneId, new PhoneUpdateRequest()));
+        assertThrows(InactiveRecordException.class, () -> phoneController
+                .updatePhone(phoneId, new PhoneUpdateRequest()));
     }
 
     @Test
     void deletePhone_shouldThrowRecordNotFoundException() {
         doThrow(new RecordNotFoundException("Phone not found")).when(phoneService).deleteById(phoneId);
-        assertThrows(RecordNotFoundException.class, () ->
-                personPhoneController.deletePhone(phoneId));
+        assertThrows(RecordNotFoundException.class, () -> phoneController
+                .deletePhone(phoneId));
     }
 
     @Test
     void deletePhone_shouldThrowInactiveRecordException() {
         doThrow(new InactiveRecordException("Phone is inactive")).when(phoneService).deleteById(phoneId);
-        assertThrows(InactiveRecordException.class, () ->
-                personPhoneController.deletePhone(phoneId));
+        assertThrows(InactiveRecordException.class, () -> phoneController
+                .deletePhone(phoneId));
     }
 }
